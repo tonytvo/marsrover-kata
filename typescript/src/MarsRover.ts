@@ -10,18 +10,14 @@ export class Position {
   }
 }
 
-enum FacingDirection {
+export enum FacingDirection {
   NORTH = "N",
   WEST = "W",
   EAST = "E"
 }
 
-const NORTH_FACING = FacingDirection.NORTH;
-const WEST_FACING = FacingDirection.WEST;
-const EAST_FACING = FacingDirection.EAST;
-
 export class MarsRover {
-  constructor(position: Position = new Position(0, 0, NORTH_FACING)) {
+  constructor(position: Position = new Position(0, 0, FacingDirection.NORTH)) {
     this._position = position;
   }
 
@@ -29,10 +25,10 @@ export class MarsRover {
 
   rotate(direction: string): MarsRover {
     if (direction === "L") {
-      return MarsRover.of(new Position(0, 0, WEST_FACING));
+      return MarsRover.of(new Position(0, 0, FacingDirection.WEST));
     }
 
-    return MarsRover.of(new Position(0, 0, EAST_FACING));
+    return MarsRover.of(new Position(0, 0, FacingDirection.EAST));
   }
 
   static of(position: Position): MarsRover {
