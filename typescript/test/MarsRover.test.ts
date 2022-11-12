@@ -11,9 +11,11 @@ describe("MarsRover", () => {
 
   test.each([
     [MovingDirection.RIGHT, FacingDirection.NORTH, FacingDirection.EAST],
-    [MovingDirection.LEFT, FacingDirection.NORTH, FacingDirection.WEST]
-  ])("given the rover rotate from north, it should point to correct direction",
+    [MovingDirection.LEFT, FacingDirection.NORTH, FacingDirection.WEST],
+    [MovingDirection.LEFT, FacingDirection.WEST, FacingDirection.SOUTH]
+  ])("given the rover rotate %p from %p, it should point to %p",
     (movingDirection: MovingDirection, fromFacingDirection: FacingDirection, toFacingDirection: FacingDirection) => {
-      expect(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection))).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection)));
+      expect(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection)))
+        .toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection)));
   });
 });

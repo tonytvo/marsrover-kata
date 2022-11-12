@@ -8,12 +8,21 @@ export class Position {
     this.y = y;
     this.direction = direction;
   }
+
+  isNorth() {
+    return this.direction === FacingDirection.NORTH;
+  }
+
+  isWest() {
+    return this.direction == FacingDirection.WEST;
+  }
 }
 
 export enum FacingDirection {
   NORTH = "N",
   WEST = "W",
-  EAST = "E"
+  EAST = "E",
+  SOUTH = "S"
 }
 
 export enum MovingDirection {
@@ -29,8 +38,12 @@ export class MarsRover {
   private readonly _position: Position;
 
   rotate(direction: MovingDirection): MarsRover {
-    if (direction === MovingDirection.LEFT) {
+    if (direction === MovingDirection.LEFT && this._position.isNorth()) {
       return MarsRover.of(new Position(0, 0, FacingDirection.WEST));
+    }
+
+    if (direction === MovingDirection.LEFT && this._position.isWest()) {
+      return MarsRover.of(new Position(0, 0, FacingDirection.SOUTH));
     }
 
     return MarsRover.of(new Position(0, 0, FacingDirection.EAST));
