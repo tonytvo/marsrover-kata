@@ -18,7 +18,7 @@ export class MarsRover {
   private readonly _position: Position;
 
   rotate(direction: string) {
-    return null;
+    return new MarsRover(new Position(0, 0, "E"));
   }
 
   static of(position: Position) {

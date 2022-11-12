@@ -7,8 +7,8 @@ describe("MarsRover", () => {
     expect(JSON.stringify(new MarsRover())).toEqual(JSON.stringify(MarsRover.of(new Position(0, 0, "N"))));
   });
 
-  test.skip("given the rover rotate right from north, it should point to east", () => {
-    expect(JSON.stringify(new MarsRover().rotate("R"))).toEqual(JSON.stringify(new Position(0, 0, "E")));
+  test("given the rover rotate right from north, it should point to east", () => {
+    expect(JSON.stringify(new MarsRover().rotate("R"))).toEqual(JSON.stringify(MarsRover.of(new Position(0, 0, "E"))));
   });
 
 });
