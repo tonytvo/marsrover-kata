@@ -11,7 +11,10 @@ export class Position {
 }
 
 export class MarsRover {
-  private _position = new Position(0, 0, "N");
+  constructor(position: Position = new Position(0, 0, "N")) {
+    this._position = position;
+  }
+  private _position: Position;
 
   position() {
     return this._position;
