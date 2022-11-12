@@ -6,11 +6,11 @@ export class MarsRoverFactory {
   }
 
   static createMarsRoverFromFacingDirection(facingDirection: FacingDirection) {
-    return MarsRoverFactory.createMarsRoverFrom(new Position(0, 0, facingDirection), facingDirection);
+    return MarsRoverFactory.createMarsRoverFrom(new Position(0, 0), facingDirection);
   }
 
   static createDefaultMarsRover() {
-    let position = new Position(0, 0, FacingDirection.NORTH);
+    let position = new Position(0, 0);
     return new MarsRover(position, FacingDirection.NORTH);
   }
 }

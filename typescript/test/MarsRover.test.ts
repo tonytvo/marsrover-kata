@@ -5,7 +5,7 @@ import { MarsRoverFactory } from "../src/MarsRoverFactory";
 describe("MarsRover", () => {
 
   test("given the rover is created, it should have starting point of 0, 0, N", () => {
-    let position = new Position(0, 0, FacingDirection.NORTH);
+    let position = new Position(0, 0);
     expect(JSON.stringify(MarsRoverFactory.createDefaultMarsRover())).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFrom(position, FacingDirection.NORTH)));
   });
 
