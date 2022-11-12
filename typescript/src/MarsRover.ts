@@ -8,11 +8,6 @@ export class Position {
     this.y = y;
     this.direction = direction;
   }
-
-  isNorth() {
-    return this.direction === FacingDirection.NORTH;
-  }
-
   isWest() {
     return this.direction == FacingDirection.WEST;
   }
@@ -40,7 +35,7 @@ export class MarsRover {
   private readonly _position: Position;
 
   rotate(movingDirection: MovingDirection): MarsRover {
-    if (movingDirection === MovingDirection.LEFT && this._position.isNorth()) {
+    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.NORTH) {
       return MarsRover.of(new Position(0, 0, FacingDirection.WEST), FacingDirection.WEST);
     }
 
