@@ -11,8 +11,10 @@ export class Position {
 }
 
 export class MarsRover {
+  private _position = new Position(0, 0, "N");
+
   position() {
-    return new Position(0, 0, "N");
+    return this._position;
   }
 
   rotate(direction: string) {
