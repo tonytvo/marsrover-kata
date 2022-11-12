@@ -16,6 +16,10 @@ export class Position {
   isWest() {
     return this.direction == FacingDirection.WEST;
   }
+
+  facingDirection() {
+    return this.direction;
+  }
 }
 
 export enum FacingDirection {
@@ -31,7 +35,7 @@ export enum MovingDirection {
 }
 
 export class MarsRover {
-  constructor(position: Position = new Position(0, 0, FacingDirection.NORTH)) {
+  constructor(position: Position = new Position(0, 0, FacingDirection.NORTH), facingDirection: FacingDirection) {
     this._position = position;
   }
 
@@ -50,6 +54,6 @@ export class MarsRover {
   }
 
   static of(position: Position): MarsRover {
-    return new MarsRover(position);
+    return new MarsRover(position, position.facingDirection());
   }
 }

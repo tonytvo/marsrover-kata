@@ -11,6 +11,7 @@ export class MarsRoverFactory {
 
 
   static createDefaultMarsRover() {
-    return new MarsRover();
+    let position = new Position(0, 0, FacingDirection.NORTH);
+    return new MarsRover(position, position.facingDirection());
   }
 }
