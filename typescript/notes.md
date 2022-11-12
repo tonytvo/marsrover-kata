@@ -1,0 +1,3 @@
+- review objects cathestic, functional cathestic and arlo commit notation.
+- what's arlo notion for adding only tests?
+- F!! to add both tests and production code feels like big steps

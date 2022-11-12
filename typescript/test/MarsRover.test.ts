@@ -1,7 +1,10 @@
-import { describe, test } from "@jest/globals";
-import { MarsRover } from "../src/MarsRover";
+import { describe, test, expect } from "@jest/globals";
+import { MarsRover, Position } from "../src/MarsRover";
 
 
 describe("MarsRover", () => {
-  test("move", () => {});
+  test("given the rover is created, it should have starting point of 0, 0, N", () => {
+    let marsRover = new MarsRover();
+    expect(JSON.stringify(marsRover.position())).toEqual(JSON.stringify(new Position(0, 0, "N")));
+  });
 });
