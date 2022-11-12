@@ -39,7 +39,7 @@ export class MarsRover {
       return MarsRover.of(new Position(0, 0, FacingDirection.WEST), FacingDirection.WEST);
     }
 
-    if (movingDirection === MovingDirection.LEFT && this._position.isWest()) {
+    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Position(0, 0, FacingDirection.SOUTH), FacingDirection.SOUTH);
     }
 
