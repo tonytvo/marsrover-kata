@@ -55,7 +55,7 @@ export class MarsRover {
     return MarsRover.of(new Position(0, 0, FacingDirection.EAST));
   }
 
-  static of(position: Position): MarsRover {
-    return new MarsRover(position, position.facingDirection());
+  static of(position: Position, facingDirection: FacingDirection = position.facingDirection()): MarsRover {
+    return new MarsRover(position, facingDirection);
   }
 }
