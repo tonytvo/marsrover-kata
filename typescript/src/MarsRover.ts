@@ -38,6 +38,10 @@ export class MarsRover {
       return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
     }
 
+    if (movingDirection === MovingDirection.RIGHT && this._facingDirection === FacingDirection.WEST) {
+      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
+    }
+
     return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
   }
 
