@@ -50,6 +50,14 @@ export class MarsRover {
       return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
     }
 
+    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.EAST) {
+      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
+    }
+
+    if (movingDirection === MovingDirection.RIGHT && this._facingDirection === FacingDirection.EAST) {
+      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
+    }
+
     return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
   }
 
