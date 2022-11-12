@@ -23,4 +23,8 @@ export class MarsRover {
   rotate(direction: string) {
     return null;
   }
+
+  static of(position: Position) {
+    return new MarsRover(position);
+  }
 }
