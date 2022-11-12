@@ -1,15 +1,10 @@
 export class Position {
   private readonly x: number;
   private readonly y: number;
-  private readonly direction: FacingDirection;
 
   constructor(x: number, y:  number, direction: FacingDirection) {
     this.x = x;
     this.y = y;
-    this.direction = direction;
-  }
-  isWest() {
-    return this.direction == FacingDirection.WEST;
   }
 }
 
