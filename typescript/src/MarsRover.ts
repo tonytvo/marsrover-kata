@@ -14,4 +14,8 @@ export class MarsRover {
   position() {
     return new Position(0, 0, "N");
   }
+
+  rotate(direction: string) {
+    return null;
+  }
 }
