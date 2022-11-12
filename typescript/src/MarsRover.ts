@@ -10,11 +10,15 @@ export class Position {
   }
 }
 
-const NORTH_FACING = "N";
+enum FacingDirection {
+  NORTH = "N",
+  WEST = "W",
+  EAST = "E"
+}
 
-const WEST_FACING = "W";
-
-const EAST_FACING = "E";
+const NORTH_FACING = FacingDirection.NORTH;
+const WEST_FACING = FacingDirection.WEST;
+const EAST_FACING = FacingDirection.EAST;
 
 export class MarsRover {
   constructor(position: Position = new Position(0, 0, NORTH_FACING)) {
