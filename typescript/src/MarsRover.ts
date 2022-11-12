@@ -10,8 +10,14 @@ export class Position {
   }
 }
 
+const NORTH_FACING = "N";
+
+const WEST_FACING = "W";
+
+const EAST_FACING = "E";
+
 export class MarsRover {
-  constructor(position: Position = new Position(0, 0, "N")) {
+  constructor(position: Position = new Position(0, 0, NORTH_FACING)) {
     this._position = position;
   }
 
@@ -19,10 +25,10 @@ export class MarsRover {
 
   rotate(direction: string): MarsRover {
     if (direction === "L") {
-      return MarsRover.of(new Position(0, 0, "W"));
+      return MarsRover.of(new Position(0, 0, WEST_FACING));
     }
 
-    return MarsRover.of(new Position(0, 0, "E"));
+    return MarsRover.of(new Position(0, 0, EAST_FACING));
   }
 
   static of(position: Position): MarsRover {
