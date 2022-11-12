@@ -11,4 +11,8 @@ describe("MarsRover", () => {
     expect(JSON.stringify(new MarsRover().rotate("R"))).toEqual(JSON.stringify(MarsRover.of(new Position(0, 0, "E"))));
   });
 
+  test("given the rover rotate left from north, it should point to west", () => {
+    expect(JSON.stringify(new MarsRover().rotate("L"))).toEqual(JSON.stringify(MarsRover.of(new Position(0, 0, "W"))));
+  });
+
 });

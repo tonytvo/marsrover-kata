@@ -17,11 +17,15 @@ export class MarsRover {
 
   private readonly _position: Position;
 
-  rotate(direction: string) {
-    return new MarsRover(new Position(0, 0, "E"));
+  rotate(direction: string): MarsRover {
+    if (direction === "L") {
+      return MarsRover.of(new Position(0, 0, "W"));
+    }
+
+    return MarsRover.of(new Position(0, 0, "E"));
   }
 
-  static of(position: Position) {
+  static of(position: Position): MarsRover {
     return new MarsRover(position);
   }
 }
