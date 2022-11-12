@@ -56,3 +56,8 @@ Expected Output:
 
 ### Acknowledgements
 This kata is described on [Google code](https://code.google.com/archive/p/marsrovertechchallenge/)
+
+# References
+- https://www.youtube.com/watch?v=24vzFAvOzo0
+- https://github.com/emilybache/MarsRover-Kata
+- https://github.com/emilybache/MarsRover-Sample-Tests
