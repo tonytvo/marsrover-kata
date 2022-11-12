@@ -37,8 +37,10 @@ export enum MovingDirection {
 export class MarsRover {
   constructor(position: Position = new Position(0, 0, FacingDirection.NORTH), facingDirection: FacingDirection) {
     this._position = position;
+    this._facingDirection = facingDirection;
   }
 
+  private readonly _facingDirection: FacingDirection;
   private readonly _position: Position;
 
   rotate(direction: MovingDirection): MarsRover {
