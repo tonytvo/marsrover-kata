@@ -16,6 +16,11 @@ export enum FacingDirection {
   EAST = "E"
 }
 
+export enum MovingDirection {
+  LEFT = "L",
+  RIGHT = "R"
+}
+
 export class MarsRover {
   constructor(position: Position = new Position(0, 0, FacingDirection.NORTH)) {
     this._position = position;
@@ -24,7 +29,7 @@ export class MarsRover {
   private readonly _position: Position;
 
   rotate(direction: string): MarsRover {
-    if (direction === "L") {
+    if (direction === MovingDirection.LEFT) {
       return MarsRover.of(new Position(0, 0, FacingDirection.WEST));
     }
 

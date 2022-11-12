@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { FacingDirection, MarsRover, Position } from "../src/MarsRover";
+import { FacingDirection, MovingDirection, MarsRover, Position } from "../src/MarsRover";
 import { MarsRoverFactory } from "../src/MarsRoverFactory";
 
 describe("MarsRover", () => {
@@ -10,11 +10,11 @@ describe("MarsRover", () => {
   });
 
   test("given the rover rotate right from north, it should point to east", () => {
-    expect(JSON.stringify(MarsRoverFactory.createDefaultMarsRover().rotate("R"))).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFrom(new Position(0, 0, FacingDirection.EAST))));
+    expect(JSON.stringify(MarsRoverFactory.createDefaultMarsRover().rotate(MovingDirection.RIGHT))).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFrom(new Position(0, 0, FacingDirection.EAST))));
   });
 
   test("given the rover rotate left from north, it should point to west", () => {
-    expect(JSON.stringify(MarsRoverFactory.createDefaultMarsRover().rotate("L"))).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFrom(new Position(0, 0, FacingDirection.WEST))));
+    expect(JSON.stringify(MarsRoverFactory.createDefaultMarsRover().rotate(MovingDirection.LEFT))).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFrom(new Position(0, 0, FacingDirection.WEST))));
   });
 
 });
