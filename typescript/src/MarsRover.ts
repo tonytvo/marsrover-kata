@@ -1,4 +1,4 @@
-export class Position {
+export class Coord {
   private readonly x: number;
   private readonly y: number;
 
@@ -21,27 +21,27 @@ export enum MovingDirection {
 }
 
 export class MarsRover {
-  constructor(position: Position = new Position(0, 0), facingDirection: FacingDirection) {
+  constructor(position: Coord = new Coord(0, 0), facingDirection: FacingDirection) {
     this._position = position;
     this._facingDirection = facingDirection;
   }
 
   private readonly _facingDirection: FacingDirection;
-  private readonly _position: Position;
+  private readonly _position: Coord;
 
   rotate(movingDirection: MovingDirection): MarsRover {
     if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.NORTH) {
-      return MarsRover.of(new Position(0, 0), FacingDirection.WEST);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST);
     }
 
     if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.WEST) {
-      return MarsRover.of(new Position(0, 0), FacingDirection.SOUTH);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
     }
 
-    return MarsRover.of(new Position(0, 0), FacingDirection.EAST);
+    return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
   }
 
-  static of(position: Position, facingDirection: FacingDirection): MarsRover {
+  static of(position: Coord, facingDirection: FacingDirection): MarsRover {
     return new MarsRover(position, facingDirection);
   }
 }
