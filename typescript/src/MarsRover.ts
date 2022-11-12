@@ -1,7 +1,7 @@
 export class Position {
-  private x: number;
-  private y: number;
-  private direction: FacingDirection;
+  private readonly x: number;
+  private readonly y: number;
+  private readonly direction: FacingDirection;
 
   constructor(x: number, y:  number, direction: FacingDirection) {
     this.x = x;
@@ -15,10 +15,6 @@ export class Position {
 
   isWest() {
     return this.direction == FacingDirection.WEST;
-  }
-
-  facingDirection() {
-    return this.direction;
   }
 }
 
@@ -43,12 +39,12 @@ export class MarsRover {
   private readonly _facingDirection: FacingDirection;
   private readonly _position: Position;
 
-  rotate(direction: MovingDirection): MarsRover {
-    if (direction === MovingDirection.LEFT && this._position.isNorth()) {
+  rotate(movingDirection: MovingDirection): MarsRover {
+    if (movingDirection === MovingDirection.LEFT && this._position.isNorth()) {
       return MarsRover.of(new Position(0, 0, FacingDirection.WEST), FacingDirection.WEST);
     }
 
-    if (direction === MovingDirection.LEFT && this._position.isWest()) {
+    if (movingDirection === MovingDirection.LEFT && this._position.isWest()) {
       return MarsRover.of(new Position(0, 0, FacingDirection.SOUTH), FacingDirection.SOUTH);
     }
 
