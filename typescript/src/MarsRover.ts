@@ -45,17 +45,17 @@ export class MarsRover {
 
   rotate(direction: MovingDirection): MarsRover {
     if (direction === MovingDirection.LEFT && this._position.isNorth()) {
-      return MarsRover.of(new Position(0, 0, FacingDirection.WEST));
+      return MarsRover.of(new Position(0, 0, FacingDirection.WEST), FacingDirection.WEST);
     }
 
     if (direction === MovingDirection.LEFT && this._position.isWest()) {
-      return MarsRover.of(new Position(0, 0, FacingDirection.SOUTH));
+      return MarsRover.of(new Position(0, 0, FacingDirection.SOUTH), FacingDirection.SOUTH);
     }
 
-    return MarsRover.of(new Position(0, 0, FacingDirection.EAST));
+    return MarsRover.of(new Position(0, 0, FacingDirection.EAST), FacingDirection.EAST);
   }
 
-  static of(position: Position, facingDirection: FacingDirection = position.facingDirection()): MarsRover {
+  static of(position: Position, facingDirection: FacingDirection): MarsRover {
     return new MarsRover(position, facingDirection);
   }
 }

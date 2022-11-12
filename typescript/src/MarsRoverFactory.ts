@@ -2,16 +2,15 @@ import { FacingDirection, MarsRover, Position } from "./MarsRover";
 
 export class MarsRoverFactory {
   static createMarsRoverFrom(position: Position) {
-    return MarsRover.of(position);
+    return MarsRover.of(position, position.facingDirection());
   }
 
   static createMarsRoverFromFacingDirection(facingDirection: FacingDirection) {
     return MarsRoverFactory.createMarsRoverFrom(new Position(0, 0, facingDirection));
   }
 
-
   static createDefaultMarsRover() {
     let position = new Position(0, 0, FacingDirection.NORTH);
-    return new MarsRover(position, position.facingDirection());
+    return new MarsRover(position, FacingDirection.NORTH);
   }
 }
