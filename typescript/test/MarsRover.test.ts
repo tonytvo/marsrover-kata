@@ -1,15 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import { MarsRover, Position } from "../src/MarsRover";
-
-class MarsRoverFactory {
-  static createMarsRoverFrom(position: Position) {
-    return MarsRover.of(position);
-  }
-
-  static createDefaultMarsRover() {
-    return new MarsRover();
-  }
-}
+import { MarsRoverFactory } from "../src/MarsRoverFactory";
 
 describe("MarsRover", () => {
 
