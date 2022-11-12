@@ -1,9 +1,9 @@
 export class Position {
   private x: number;
   private y: number;
-  private direction: string;
+  private direction: FacingDirection;
 
-  constructor(x: number, y:  number, direction: string) {
+  constructor(x: number, y:  number, direction: FacingDirection) {
     this.x = x;
     this.y = y;
     this.direction = direction;

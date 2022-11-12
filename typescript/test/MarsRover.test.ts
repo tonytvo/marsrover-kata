@@ -1,11 +1,11 @@
 import { describe, expect, test } from "@jest/globals";
-import { MarsRover, Position, FacingDirection } from "../src/MarsRover";
+import { FacingDirection, MarsRover, Position } from "../src/MarsRover";
 import { MarsRoverFactory } from "../src/MarsRoverFactory";
 
 describe("MarsRover", () => {
 
   test("given the rover is created, it should have starting point of 0, 0, N", () => {
-    let position = new Position(0, 0, "N");
+    let position = new Position(0, 0, FacingDirection.NORTH);
     expect(JSON.stringify(MarsRoverFactory.createDefaultMarsRover())).toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFrom(position)));
   });
 
