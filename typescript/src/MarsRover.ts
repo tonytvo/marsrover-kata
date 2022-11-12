@@ -28,7 +28,7 @@ export class MarsRover {
 
   private readonly _position: Position;
 
-  rotate(direction: string): MarsRover {
+  rotate(direction: MovingDirection): MarsRover {
     if (direction === MovingDirection.LEFT) {
       return MarsRover.of(new Position(0, 0, FacingDirection.WEST));
     }
