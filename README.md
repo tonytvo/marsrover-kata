@@ -21,6 +21,10 @@ Here's the summary of the rules that could be implemented:
 - the rover wraps around if it reaches the end of the grid
 - the grid may have obstacles. If a given sequence of commands encounters an obstacle, the rover moves up to the last possible point and reports the obstacle e.g. 0:2:2:N
 
+Apply Object Calisthenics and Functional-Calisthenics as much as possible
+- https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf
+- https://blog.ninjaferret.co.uk/2015/06/05/Introducing-Functional-Calisthenics.html
+- https://www.codurance.com/publications/2017/10/12/functional-calisthenics
 
 ## Input:
 
@@ -61,3 +65,6 @@ This kata is described on [Google code](https://code.google.com/archive/p/marsro
 - https://www.youtube.com/watch?v=24vzFAvOzo0
 - https://github.com/emilybache/MarsRover-Kata
 - https://github.com/emilybache/MarsRover-Sample-Tests
+- https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf
+- https://blog.ninjaferret.co.uk/2015/06/05/Introducing-Functional-Calisthenics.html
+- https://www.codurance.com/publications/2017/10/12/functional-calisthenics
