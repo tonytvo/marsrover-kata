@@ -32,7 +32,6 @@ export interface RoverState {
   publishLocation(): string;
   turnLeft(): RoverState;
   turnRight(): RoverState;
-  nextState(roverCommand: RoverCommand): RoverState;
 }
 
 export class RoverStateNorth implements RoverState {
@@ -42,23 +41,6 @@ export class RoverStateNorth implements RoverState {
   constructor(position: Coord, facingDirection: FacingDirection) {
     this._position = position;
     this._facingDirection = facingDirection;
-  }
-
-  nextState(roverCommand: RoverCommand): RoverState {
-    if (this._facingDirection !== FacingDirection.NORTH) {
-      throw new Error('should never execute nextState with facingDirection not North');
-    }
-
-    if (roverCommand === RoverCommand.TURN_LEFT) {
-      return this.turnLeft();
-    }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT) {
-      return this.turnRight();
-    }
-
-
-    throw new Error('should never get here');
   }
 
   publishLocation() {
@@ -81,19 +63,6 @@ export class RoverStateWest implements RoverState {
     this._position = position;
   }
 
-  nextState(roverCommand: RoverCommand): RoverState {
-    if (roverCommand === RoverCommand.TURN_LEFT) {
-      return this.turnLeft();
-    }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT) {
-      return this.turnRight();
-    }
-
-
-    throw new Error('should never get here');
-  }
-
   publishLocation() {
     return `${this._position.toString()}:W`;
   }
@@ -114,18 +83,6 @@ export class RoverStateLegacy implements RoverState {
   constructor(position: Coord, facingDirection: FacingDirection) {
     this._position = position;
     this._facingDirection = facingDirection;
-  }
-
-  nextState(roverCommand: RoverCommand): RoverState {
-    if (roverCommand === RoverCommand.TURN_LEFT) {
-      return this.turnLeft();
-    }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT) {
-      return this.turnRight();
-    }
-
-    throw new Error('should never get here');
   }
 
   publishLocation() {
