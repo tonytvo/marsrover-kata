@@ -45,6 +45,10 @@ export class RoverStateNorth implements RoverState {
   }
 
   nextState(roverCommand: RoverCommand): Option<RoverStateNorth> {
+    if (this._facingDirection !== FacingDirection.NORTH) {
+      throw new Error('should never execute nextState with facingDirection not North');
+    }
+
     if (roverCommand === RoverCommand.TURN_LEFT) {
       return this.turnLeft();
     }
@@ -62,18 +66,10 @@ export class RoverStateNorth implements RoverState {
   }
 
   turnLeft() {
-    if (this._facingDirection !== FacingDirection.NORTH) {
-      return option.none;
-    }
-
     return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));
   }
 
   turnRight() {
-    if (this._facingDirection !== FacingDirection.NORTH) {
-      return option.none;
-    }
-
     return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
   }
 }
@@ -87,9 +83,9 @@ export class RoverStateWest implements RoverState {
     this._facingDirection = facingDirection;
   }
 
-  nextState(roverCommand: RoverCommand): Option<RoverStateNorth> {
+  nextState(roverCommand: RoverCommand): Option<RoverState> {
     if (this._facingDirection !== FacingDirection.WEST) {
-      return option.none;
+      throw new Error('should never execute nextState with facingDirection not West');
     }
 
     if (roverCommand === RoverCommand.TURN_LEFT) {
