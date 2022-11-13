@@ -25,12 +25,16 @@ export enum RoverCommand {
 }
 
 export class RoverState {
-  private _facingDirection: FacingDirection;
-  private _position: Coord;
+  private readonly _facingDirection: FacingDirection;
+  private readonly _position: Coord;
 
   constructor(position: Coord, facingDirection: FacingDirection) {
     this._position = position;
     this._facingDirection = facingDirection;
+  }
+
+  publishLocation() {
+    return `${this._position.toString()}:${this._facingDirection}`;
   }
 }
 
@@ -82,6 +86,6 @@ export class MarsRover {
   }
 
   publishLocation() {
-    return `${this._position.toString()}:${this._facingDirection}`;
+    return this._roverState.publishLocation();
   }
 }
