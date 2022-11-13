@@ -22,11 +22,6 @@ export class MarsRover {
 
   private readonly _roverState: RoverState;
 
-  rotate(roverCommand: RoverCommand): MarsRover {
-    const turn = this.getTurnStateMonoid();
-    const [, finalState] = turn(roverCommand)(this._roverState);
-    return MarsRover.of(finalState);
-  }
   static of(roverState: RoverState): MarsRover {
     return new MarsRover(roverState);
   }
@@ -35,17 +30,25 @@ export class MarsRover {
     return this._roverState.publishLocation();
   }
 
-  execute(roverCommands: RoverCommand[]): MarsRover {
-    const turn = this.getTurnStateMonoid();
+  executeSingleCommand(roverCommand: RoverCommand): MarsRover {
+    return this.execute([roverCommand]);
+  }
 
-    const f = (command: RoverCommand) => turn(command);
-    const turnActions = pipe(roverCommands, map(f));
+  execute(roverCommands: RoverCommand[]): MarsRover {
+    const turnActions = this.getActionsForStateMonoid(roverCommands);
     const [, finalState] = S.sequenceArray(turnActions)(this._roverState);
     return MarsRover.of(finalState);
   }
 
-  private getTurnStateMonoid() {
-    return (roverCommand): S.State<RoverState, RoverState> => (state: RoverState) => {
+  private getActionsForStateMonoid(roverCommands: RoverCommand[]) {
+    const action = this.getRoverStateMonoid();
+    const comandToRoverStateMonoid = (command: RoverCommand) => action(command);
+    const actions = pipe(roverCommands, map(comandToRoverStateMonoid));
+    return actions;
+  }
+
+  private getRoverStateMonoid() {
+    return (roverCommand): S.State<RoverState, any> => (state: RoverState) => {
       switch (roverCommand) {
         case RoverCommand.TURN_LEFT:
           const roverState = state.turnLeft();
@@ -58,4 +61,3 @@ export class MarsRover {
     };
   }
 }
-
