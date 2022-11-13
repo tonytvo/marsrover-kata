@@ -31,6 +31,26 @@ export class RoverStateNorth implements RoverState {
   }
 }
 
+export class RoverStateSouth implements RoverState {
+  private readonly _position: Coord;
+
+  constructor(position: Coord) {
+    this._position = position;
+  }
+
+  publishLocation() {
+    return `${this._position.toString()}:S`;
+  }
+
+  turnLeft() {
+    return new RoverStateWest(new Coord(0, 0));
+  }
+
+  turnRight() {
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+  }
+}
+
 export class RoverStateWest implements RoverState {
   private readonly _position: Coord;
 

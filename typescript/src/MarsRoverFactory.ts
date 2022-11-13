@@ -3,7 +3,7 @@ import {
   MarsRover
 } from "./MarsRover";
 import { Coord } from "./Coord";
-import { RoverState, RoverStateLegacy, RoverStateNorth, RoverStateWest } from "./RoverStateWest";
+import { RoverState, RoverStateLegacy, RoverStateNorth, RoverStateSouth, RoverStateWest } from "./RoverStateWest";
 
 export class MarsRoverFactory {
   static createMarsRoverFrom(position: Coord, facingDirection: FacingDirection) {
@@ -12,6 +12,8 @@ export class MarsRoverFactory {
       roverState = new RoverStateWest(position);
     } else if (facingDirection === FacingDirection.NORTH) {
       roverState = new RoverStateNorth(position, facingDirection);
+    } else if (facingDirection === FacingDirection.SOUTH) {
+      roverState = new RoverStateSouth(position);
     }
 
     return MarsRover.of(roverState);
