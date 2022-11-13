@@ -25,17 +25,25 @@ export enum RoverCommand {
 }
 
 export class RoverState {
+  private _facingDirection: FacingDirection;
+  private _position: Coord;
 
+  constructor(position: Coord, facingDirection: FacingDirection) {
+    this._position = position;
+    this._facingDirection = facingDirection;
+  }
 }
 
 export class MarsRover {
   constructor(position: Coord = new Coord(0, 0), facingDirection: FacingDirection) {
     this._position = position;
     this._facingDirection = facingDirection;
+    this._roverState = new RoverState(this._position, this._facingDirection);
   }
 
   private readonly _facingDirection: FacingDirection;
   private readonly _position: Coord;
+  private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
