@@ -166,27 +166,6 @@ export class MarsRover {
     let nextState = this._roverState.nextState(roverCommand);
     return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, nextState);
   }
-
-  private rotateAppleSauce(roverCommand: RoverCommand) {
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateWest(new Coord(0, 0)));
-    }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.EAST, new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
-    }
-
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.EAST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
-    }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.EAST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH, new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
-    }
-
-    return MarsRover.of(new Coord(0, 0), FacingDirection.EAST, new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
-  }
-
   static of(position: Coord, facingDirection: FacingDirection, roverState: RoverState): MarsRover {
     return new MarsRover(position, facingDirection, roverState);
   }
