@@ -20,7 +20,7 @@ describe("MarsRover", () => {
     [RoverCommand.TURN_RIGHT, FacingDirection.EAST, FacingDirection.SOUTH]
   ])("given the rover rotate %p from %p, it should point to %p",
     (movingDirection: RoverCommand, fromFacingDirection: FacingDirection, toFacingDirection: FacingDirection) => {
-      expect(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection)))
-        .toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection)));
+      expect(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection).publishLocation())
+        .toEqual(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection).publishLocation());
   });
 });

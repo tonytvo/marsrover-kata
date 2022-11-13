@@ -6,6 +6,10 @@ export class Coord {
     this.x = x;
     this.y = y;
   }
+
+  toString() {
+    return `${this.x}:${this.y}`
+  }
 }
 
 export enum FacingDirection {
@@ -67,5 +71,9 @@ export class MarsRover {
 
   static of(position: Coord, facingDirection: FacingDirection): MarsRover {
     return new MarsRover(position, facingDirection);
+  }
+
+  publishLocation() {
+    return `${this._position.toString()}:${this._facingDirection}`;
   }
 }
