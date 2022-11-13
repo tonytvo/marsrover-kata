@@ -10,7 +10,7 @@ export class MarsRoverFactory {
   private static createRoverState(position: Coord, facingDirection: FacingDirection) {
     const stateSupplierByDirection = new Map<FacingDirection, () => RoverState>([
       [FacingDirection.WEST, () => new RoverStateWest(position)],
-      [FacingDirection.NORTH, () => new RoverStateNorth(position, facingDirection)],
+      [FacingDirection.NORTH, () => new RoverStateNorth(position)],
       [FacingDirection.SOUTH, () => new RoverStateSouth(position)],
       [FacingDirection.EAST, () => new RoverStateEast(position)]
     ]);
@@ -27,6 +27,6 @@ export class MarsRoverFactory {
 
   static createDefaultMarsRover() {
     let position = new Coord(0, 0);
-    return new MarsRover(new RoverStateNorth(position, FacingDirection.NORTH));
+    return new MarsRover(new RoverStateNorth(position));
   }
 }

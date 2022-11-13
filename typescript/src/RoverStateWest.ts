@@ -10,12 +10,10 @@ export interface RoverState {
 }
 
 export class RoverStateNorth implements RoverState {
-  private readonly _facingDirection: FacingDirection;
   private readonly _position: Coord;
 
-  constructor(position: Coord, facingDirection: FacingDirection) {
+  constructor(position: Coord) {
     this._position = position;
-    this._facingDirection = facingDirection;
   }
 
   publishLocation() {
@@ -67,7 +65,7 @@ export class RoverStateWest implements RoverState {
   }
 
   turnRight() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
+    return new RoverStateNorth(new Coord(0, 0));
   }
 }
 
@@ -83,7 +81,7 @@ export class RoverStateEast implements RoverState {
   }
 
   turnLeft() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
+    return new RoverStateNorth(new Coord(0, 0));
   }
 
   turnRight() {
