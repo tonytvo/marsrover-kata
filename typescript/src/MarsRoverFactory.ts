@@ -14,7 +14,7 @@ export class MarsRoverFactory {
     if (facingDirection === FacingDirection.WEST) {
       roverState = new RoverStateWest(position);
     } else if (facingDirection === FacingDirection.NORTH) {
-      roverState = new RoverStateNorth(position);
+      roverState = new RoverStateNorth(position, facingDirection);
     }
 
     return MarsRover.of(position, facingDirection, roverState);
@@ -26,6 +26,6 @@ export class MarsRoverFactory {
 
   static createDefaultMarsRover() {
     let position = new Coord(0, 0);
-    return new MarsRover(position, FacingDirection.NORTH, new RoverStateNorth(position));
+    return new MarsRover(position, FacingDirection.NORTH, new RoverStateNorth(position, FacingDirection.NORTH));
   }
 }
