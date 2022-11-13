@@ -30,9 +30,9 @@ export enum RoverCommand {
 
 export interface RoverState {
   publishLocation(): string;
-  turnLeft(): None | Some<RoverState>;
-  turnRight(): None | Some<RoverState>;
-  nextState(roverCommand: RoverCommand): None | Some<RoverState>;
+  turnLeft(): RoverState;
+  turnRight(): RoverState;
+  nextState(roverCommand: RoverCommand): RoverState;
 }
 
 export class RoverStateNorth implements RoverState {
@@ -44,7 +44,7 @@ export class RoverStateNorth implements RoverState {
     this._facingDirection = facingDirection;
   }
 
-  nextState(roverCommand: RoverCommand): Option<RoverStateNorth> {
+  nextState(roverCommand: RoverCommand): RoverState {
     if (this._facingDirection !== FacingDirection.NORTH) {
       throw new Error('should never execute nextState with facingDirection not North');
     }
@@ -58,7 +58,7 @@ export class RoverStateNorth implements RoverState {
     }
 
 
-    return option.none;
+    throw new Error('should never get here');
   }
 
   publishLocation() {
@@ -66,11 +66,11 @@ export class RoverStateNorth implements RoverState {
   }
 
   turnLeft() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST);
   }
 
   turnRight() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
   }
 }
 
@@ -81,7 +81,7 @@ export class RoverStateWest implements RoverState {
     this._position = position;
   }
 
-  nextState(roverCommand: RoverCommand): Option<RoverState> {
+  nextState(roverCommand: RoverCommand): RoverState {
     if (roverCommand === RoverCommand.TURN_LEFT) {
       return this.turnLeft();
     }
@@ -91,7 +91,7 @@ export class RoverStateWest implements RoverState {
     }
 
 
-    return option.none;
+    throw new Error('should never get here');
   }
 
   publishLocation() {
@@ -99,11 +99,11 @@ export class RoverStateWest implements RoverState {
   }
 
   turnLeft() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
   }
 
   turnRight() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
   }
 }
 
@@ -116,24 +116,24 @@ export class RoverStateLegacy implements RoverState {
     this._facingDirection = facingDirection;
   }
 
-  nextState(roverCommand: RoverCommand): Option<RoverState> {
+  nextState(roverCommand: RoverCommand): RoverState {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return option.of(new RoverStateWest(new Coord(0, 0)));
+      return new RoverStateWest(new Coord(0, 0));
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
-      return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
+      return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
     }
 
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.EAST) {
-      return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
+      return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.EAST) {
-      return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
+      return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
     }
 
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
   }
 
   publishLocation() {
@@ -141,11 +141,11 @@ export class RoverStateLegacy implements RoverState {
   }
 
   turnLeft() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
   }
 
   turnRight() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
   }
 }
 
@@ -164,11 +164,7 @@ export class MarsRover {
 
   rotate(roverCommand: RoverCommand): MarsRover {
     let nextState = this._roverState.nextState(roverCommand);
-    return pipe(nextState,
-      option.fold(
-        () => this.rotateAppleSauce(roverCommand),
-        (roverState) => MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, roverState)
-      ))
+    return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, nextState);
   }
 
   private rotateAppleSauce(roverCommand: RoverCommand) {
