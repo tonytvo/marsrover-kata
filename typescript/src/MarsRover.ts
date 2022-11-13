@@ -111,28 +111,22 @@ export class RoverStateLegacy implements RoverState {
 }
 
 export class MarsRover {
-  constructor(position: Coord = new Coord(0, 0),
-              facingDirection: FacingDirection,
-              roverState: RoverState) {
-    this._position = position;
-    this._facingDirection = facingDirection;
+  constructor(roverState: RoverState) {
     this._roverState = roverState;
   }
 
-  private readonly _facingDirection: FacingDirection;
-  private readonly _position: Coord;
   private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
     switch (roverCommand) {
       case RoverCommand.TURN_LEFT:
-        return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, this._roverState.turnLeft());
+        return MarsRover.of(this._roverState.turnLeft());
       case RoverCommand.TURN_RIGHT:
-        return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, this._roverState.turnRight());
+        return MarsRover.of(this._roverState.turnRight());
     }
   }
-  static of(position: Coord, facingDirection: FacingDirection, roverState: RoverState): MarsRover {
-    return new MarsRover(position, facingDirection, roverState);
+  static of(roverState: RoverState): MarsRover {
+    return new MarsRover(roverState);
   }
 
   publishLocation() {
