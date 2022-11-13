@@ -30,7 +30,8 @@ export enum RoverCommand {
 
 export interface RoverState {
   publishLocation(): string;
-  turnLeft(): None | Some<RoverStateNorth>;
+  turnLeft(): None | Some<RoverState>;
+  turnRight(): None | Some<RoverState>;
 }
 
 export class RoverStateNorth implements RoverState {
