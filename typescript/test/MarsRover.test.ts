@@ -13,8 +13,8 @@ describe("MarsRover", () => {
   test.each([
     [RoverCommand.TURN_RIGHT, FacingDirection.NORTH, FacingDirection.EAST],
     [RoverCommand.TURN_LEFT, FacingDirection.NORTH, FacingDirection.WEST],
-    [RoverCommand.TURN_LEFT, FacingDirection.WEST, FacingDirection.NORTH],
-    [RoverCommand.TURN_RIGHT, FacingDirection.WEST, FacingDirection.SOUTH],
+    [RoverCommand.TURN_LEFT, FacingDirection.WEST, FacingDirection.SOUTH],
+    [RoverCommand.TURN_RIGHT, FacingDirection.WEST, FacingDirection.NORTH],
     [RoverCommand.TURN_LEFT, FacingDirection.SOUTH, FacingDirection.EAST],
     [RoverCommand.TURN_RIGHT, FacingDirection.SOUTH, FacingDirection.WEST],
     [RoverCommand.TURN_LEFT, FacingDirection.EAST, FacingDirection.NORTH],
@@ -24,4 +24,15 @@ describe("MarsRover", () => {
       expect(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection).publishLocation())
         .toEqual(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection).publishLocation());
   });
+
+  test.each([
+    [[RoverCommand.TURN_RIGHT, RoverCommand.TURN_RIGHT], FacingDirection.NORTH, FacingDirection.SOUTH],
+    [[RoverCommand.TURN_RIGHT, RoverCommand.TURN_RIGHT, RoverCommand.TURN_RIGHT], FacingDirection.NORTH, FacingDirection.WEST],
+    [[RoverCommand.TURN_RIGHT, RoverCommand.TURN_RIGHT, RoverCommand.TURN_RIGHT, RoverCommand.TURN_LEFT], FacingDirection.NORTH, FacingDirection.SOUTH]
+  ])("given the rover rotate %p from %p, it should point to %p",
+    (movingDirection: RoverCommand[], fromFacingDirection: FacingDirection, toFacingDirection: FacingDirection) => {
+      expect(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).execute(movingDirection).publishLocation())
+        .toEqual(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection).publishLocation());
+    });
+
 });
