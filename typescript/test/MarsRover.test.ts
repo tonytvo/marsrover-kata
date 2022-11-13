@@ -10,14 +10,14 @@ describe("MarsRover", () => {
   });
 
   test.each([
-    [RoverCommand.RIGHT, FacingDirection.NORTH, FacingDirection.EAST],
-    [RoverCommand.LEFT, FacingDirection.NORTH, FacingDirection.WEST],
-    [RoverCommand.LEFT, FacingDirection.WEST, FacingDirection.SOUTH],
-    [RoverCommand.RIGHT, FacingDirection.WEST, FacingDirection.NORTH],
-    [RoverCommand.LEFT, FacingDirection.SOUTH, FacingDirection.WEST],
-    [RoverCommand.RIGHT, FacingDirection.SOUTH, FacingDirection.EAST],
-    [RoverCommand.LEFT, FacingDirection.EAST, FacingDirection.NORTH],
-    [RoverCommand.RIGHT, FacingDirection.EAST, FacingDirection.SOUTH]
+    [RoverCommand.TURN_RIGHT, FacingDirection.NORTH, FacingDirection.EAST],
+    [RoverCommand.TURN_LEFT, FacingDirection.NORTH, FacingDirection.WEST],
+    [RoverCommand.TURN_LEFT, FacingDirection.WEST, FacingDirection.SOUTH],
+    [RoverCommand.TURN_RIGHT, FacingDirection.WEST, FacingDirection.NORTH],
+    [RoverCommand.TURN_LEFT, FacingDirection.SOUTH, FacingDirection.WEST],
+    [RoverCommand.TURN_RIGHT, FacingDirection.SOUTH, FacingDirection.EAST],
+    [RoverCommand.TURN_LEFT, FacingDirection.EAST, FacingDirection.NORTH],
+    [RoverCommand.TURN_RIGHT, FacingDirection.EAST, FacingDirection.SOUTH]
   ])("given the rover rotate %p from %p, it should point to %p",
     (movingDirection: RoverCommand, fromFacingDirection: FacingDirection, toFacingDirection: FacingDirection) => {
       expect(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection)))
