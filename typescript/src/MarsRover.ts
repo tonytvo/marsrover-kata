@@ -120,7 +120,7 @@ export class RoverStateWest implements RoverState {
 export class MarsRover {
   constructor(position: Coord = new Coord(0, 0),
               facingDirection: FacingDirection,
-              roverState: RoverStateNorth) {
+              roverState: RoverState) {
     this._position = position;
     this._facingDirection = facingDirection;
     this._roverState = roverState;
@@ -128,7 +128,7 @@ export class MarsRover {
 
   private readonly _facingDirection: FacingDirection;
   private readonly _position: Coord;
-  private readonly _roverState: RoverStateNorth;
+  private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
     let nextState = this._roverState.nextState(roverCommand);
@@ -149,7 +149,7 @@ export class MarsRover {
     }
 
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));
+      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateWest(new Coord(0, 0), FacingDirection.WEST));
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
@@ -167,7 +167,7 @@ export class MarsRover {
     return MarsRover.of(new Coord(0, 0), FacingDirection.EAST, new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
   }
 
-  static of(position: Coord, facingDirection: FacingDirection, roverState: RoverStateNorth): MarsRover {
+  static of(position: Coord, facingDirection: FacingDirection, roverState: RoverState): MarsRover {
     return new MarsRover(position, facingDirection, roverState);
   }
 
