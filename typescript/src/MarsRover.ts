@@ -64,8 +64,12 @@ export class MarsRover {
   private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
-    //let nextState = this._roverState.nextState(roverCommand);
-    return this.rotateAppleSauce(roverCommand);
+    let nextState = this._roverState.nextState(roverCommand);
+    return pipe(nextState,
+      option.fold(
+        () => this.rotateAppleSauce(roverCommand),
+        (roverState) => MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, roverState)
+      ))
   }
 
   private rotateAppleSauce(roverCommand: RoverCommand) {
