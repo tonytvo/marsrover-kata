@@ -1,7 +1,3 @@
-import * as option from "fp-ts/lib/Option";
-import { pipe } from "fp-ts/function";
-import { None, Option, Some } from "fp-ts/es6/Option";
-
 export class Coord {
   private readonly x: number;
   private readonly y: number;
@@ -128,17 +124,12 @@ export class MarsRover {
   private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
-    let nextState;
-
-    if (roverCommand === RoverCommand.TURN_LEFT) {
-      nextState = this._roverState.turnLeft();
+    switch (roverCommand) {
+      case RoverCommand.TURN_LEFT:
+        return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, this._roverState.turnLeft());
+      case RoverCommand.TURN_RIGHT:
+        return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, this._roverState.turnRight());
     }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT) {
-      nextState = this._roverState.turnRight();
-    }
-
-    return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, nextState);
   }
   static of(position: Coord, facingDirection: FacingDirection, roverState: RoverState): MarsRover {
     return new MarsRover(position, facingDirection, roverState);
