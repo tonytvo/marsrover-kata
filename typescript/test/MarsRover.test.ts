@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { FacingDirection, MovingDirection, MarsRover, Coord } from "../src/MarsRover";
+import { FacingDirection, RoverCommand, MarsRover, Coord } from "../src/MarsRover";
 import { MarsRoverFactory } from "../src/MarsRoverFactory";
 
 describe("MarsRover", () => {
@@ -10,16 +10,16 @@ describe("MarsRover", () => {
   });
 
   test.each([
-    [MovingDirection.RIGHT, FacingDirection.NORTH, FacingDirection.EAST],
-    [MovingDirection.LEFT, FacingDirection.NORTH, FacingDirection.WEST],
-    [MovingDirection.LEFT, FacingDirection.WEST, FacingDirection.SOUTH],
-    [MovingDirection.RIGHT, FacingDirection.WEST, FacingDirection.NORTH],
-    [MovingDirection.LEFT, FacingDirection.SOUTH, FacingDirection.WEST],
-    [MovingDirection.RIGHT, FacingDirection.SOUTH, FacingDirection.EAST],
-    [MovingDirection.LEFT, FacingDirection.EAST, FacingDirection.NORTH],
-    [MovingDirection.RIGHT, FacingDirection.EAST, FacingDirection.SOUTH]
+    [RoverCommand.RIGHT, FacingDirection.NORTH, FacingDirection.EAST],
+    [RoverCommand.LEFT, FacingDirection.NORTH, FacingDirection.WEST],
+    [RoverCommand.LEFT, FacingDirection.WEST, FacingDirection.SOUTH],
+    [RoverCommand.RIGHT, FacingDirection.WEST, FacingDirection.NORTH],
+    [RoverCommand.LEFT, FacingDirection.SOUTH, FacingDirection.WEST],
+    [RoverCommand.RIGHT, FacingDirection.SOUTH, FacingDirection.EAST],
+    [RoverCommand.LEFT, FacingDirection.EAST, FacingDirection.NORTH],
+    [RoverCommand.RIGHT, FacingDirection.EAST, FacingDirection.SOUTH]
   ])("given the rover rotate %p from %p, it should point to %p",
-    (movingDirection: MovingDirection, fromFacingDirection: FacingDirection, toFacingDirection: FacingDirection) => {
+    (movingDirection: RoverCommand, fromFacingDirection: FacingDirection, toFacingDirection: FacingDirection) => {
       expect(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(fromFacingDirection).rotate(movingDirection)))
         .toEqual(JSON.stringify(MarsRoverFactory.createMarsRoverFromFacingDirection(toFacingDirection)));
   });

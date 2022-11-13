@@ -15,7 +15,7 @@ export enum FacingDirection {
   SOUTH = "S"
 }
 
-export enum MovingDirection {
+export enum RoverCommand {
   LEFT = "L",
   RIGHT = "R"
 }
@@ -29,32 +29,32 @@ export class MarsRover {
   private readonly _facingDirection: FacingDirection;
   private readonly _position: Coord;
 
-  rotate(movingDirection: MovingDirection): MarsRover {
-    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.NORTH) {
+  rotate(movingDirection: RoverCommand): MarsRover {
+    if (movingDirection === RoverCommand.LEFT && this._facingDirection === FacingDirection.NORTH) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.WEST);
     }
 
-    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.WEST) {
+    if (movingDirection === RoverCommand.LEFT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
     }
 
-    if (movingDirection === MovingDirection.RIGHT && this._facingDirection === FacingDirection.WEST) {
+    if (movingDirection === RoverCommand.RIGHT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
     }
 
-    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.SOUTH) {
+    if (movingDirection === RoverCommand.LEFT && this._facingDirection === FacingDirection.SOUTH) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.WEST);
     }
 
-    if (movingDirection === MovingDirection.RIGHT && this._facingDirection === FacingDirection.SOUTH) {
+    if (movingDirection === RoverCommand.RIGHT && this._facingDirection === FacingDirection.SOUTH) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
     }
 
-    if (movingDirection === MovingDirection.LEFT && this._facingDirection === FacingDirection.EAST) {
+    if (movingDirection === RoverCommand.LEFT && this._facingDirection === FacingDirection.EAST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
     }
 
-    if (movingDirection === MovingDirection.RIGHT && this._facingDirection === FacingDirection.EAST) {
+    if (movingDirection === RoverCommand.RIGHT && this._facingDirection === FacingDirection.EAST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
     }
 
