@@ -32,6 +32,7 @@ export interface RoverState {
   publishLocation(): string;
   turnLeft(): None | Some<RoverState>;
   turnRight(): None | Some<RoverState>;
+  nextState(roverCommand: RoverCommand): None | Some<RoverState>;
 }
 
 export class RoverStateNorth implements RoverState {
