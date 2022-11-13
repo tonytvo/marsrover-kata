@@ -18,8 +18,7 @@ export class MarsRoverFactory {
     if (stateSupplier === undefined) {
       throw new Error("unsupported facing direction");
     }
-    const roverState = stateSupplier();
-    return roverState;
+    return stateSupplier();
   }
 
   static createMarsRoverFromFacingDirection(facingDirection: FacingDirection) {
