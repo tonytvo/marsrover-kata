@@ -171,7 +171,16 @@ export class MarsRover {
   private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
-    let nextState = this._roverState.nextState(roverCommand);
+    let nextState;
+
+    if (roverCommand === RoverCommand.TURN_LEFT) {
+      nextState = this._roverState.turnLeft();
+    }
+
+    if (roverCommand === RoverCommand.TURN_RIGHT) {
+      nextState = this._roverState.turnRight();
+    }
+
     return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, nextState);
   }
   static of(position: Coord, facingDirection: FacingDirection, roverState: RoverState): MarsRover {
