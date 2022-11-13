@@ -140,14 +140,6 @@ export class MarsRover {
   }
 
   private rotateAppleSauce(roverCommand: RoverCommand) {
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.WEST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH, new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
-    }
-
-    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.WEST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
-    }
-
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateWest(new Coord(0, 0), FacingDirection.WEST));
     }
