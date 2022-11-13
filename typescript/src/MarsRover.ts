@@ -117,16 +117,12 @@ export class RoverStateLegacy implements RoverState {
   }
 
   nextState(roverCommand: RoverCommand): RoverState {
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return new RoverStateWest(new Coord(0, 0));
+    if (roverCommand === RoverCommand.TURN_LEFT) {
+      return this.turnLeft();
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
       return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
-    }
-
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.EAST) {
-      return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.EAST) {
@@ -141,7 +137,15 @@ export class RoverStateLegacy implements RoverState {
   }
 
   turnLeft() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
+    if (this._facingDirection === FacingDirection.SOUTH) {
+      return new RoverStateWest(new Coord(0, 0));
+    }
+
+    if (this._facingDirection === FacingDirection.EAST) {
+      return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
+    }
+
+    throw new Error('should not get here');
   }
 
   turnRight() {
