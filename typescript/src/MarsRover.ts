@@ -1,3 +1,5 @@
+import * as option from "fp-ts/lib/Option";
+
 export class Coord {
   private readonly x: number;
   private readonly y: number;
@@ -33,6 +35,14 @@ export class RoverState {
     this._facingDirection = facingDirection;
   }
 
+  nextState(roverCommand: RoverCommand) {
+    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
+      return option.of(new RoverState(new Coord(0, 0), FacingDirection.WEST));
+    }
+
+    return option.none;
+  }
+
   publishLocation() {
     return `${this._position.toString()}:${this._facingDirection}`;
   }
@@ -52,6 +62,11 @@ export class MarsRover {
   private readonly _roverState: RoverState;
 
   rotate(roverCommand: RoverCommand): MarsRover {
+    //let nextState = this._roverState.nextState(roverCommand);
+    return this.rotateAppleSauce(roverCommand);
+  }
+
+  private rotateAppleSauce(roverCommand: RoverCommand) {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.WEST);
     }
