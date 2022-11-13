@@ -4,6 +4,10 @@ import { RoverState, RoverStateEast, RoverStateNorth, RoverStateSouth, RoverStat
 
 export class MarsRoverFactory {
   static createMarsRoverFrom(position: Coord, facingDirection: FacingDirection) {
+    return MarsRover.of(this.createRoverState(position, facingDirection));
+  }
+
+  private static createRoverState(position: Coord, facingDirection: FacingDirection) {
     const stateSupplierByDirection = new Map<FacingDirection, () => RoverState>([
       [FacingDirection.WEST, () => new RoverStateWest(position)],
       [FacingDirection.NORTH, () => new RoverStateNorth(position, facingDirection)],
@@ -12,9 +16,10 @@ export class MarsRoverFactory {
     ]);
     const stateSupplier = stateSupplierByDirection.get(facingDirection);
     if (stateSupplier === undefined) {
-      throw new Error('unsupported facing direction')
+      throw new Error("unsupported facing direction");
     }
-    return MarsRover.of(stateSupplier());
+    const roverState = stateSupplier();
+    return roverState;
   }
 
   static createMarsRoverFromFacingDirection(facingDirection: FacingDirection) {
