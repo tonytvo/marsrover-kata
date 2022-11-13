@@ -121,15 +121,11 @@ export class RoverStateLegacy implements RoverState {
       return this.turnLeft();
     }
 
-    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
-      return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+    if (roverCommand === RoverCommand.TURN_RIGHT) {
+      return this.turnRight();
     }
 
-    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.EAST) {
-      return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
-    }
-
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+    throw new Error('should never get here');
   }
 
   publishLocation() {
@@ -149,7 +145,15 @@ export class RoverStateLegacy implements RoverState {
   }
 
   turnRight() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
+    if (this._facingDirection === FacingDirection.SOUTH) {
+      return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+    }
+
+    if (this._facingDirection === FacingDirection.EAST) {
+      return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
+    }
+
+    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
   }
 }
 
