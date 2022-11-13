@@ -20,6 +20,10 @@ export enum RoverCommand {
   TURN_RIGHT = "R"
 }
 
+export class RoverState {
+
+}
+
 export class MarsRover {
   constructor(position: Coord = new Coord(0, 0), facingDirection: FacingDirection) {
     this._position = position;
