@@ -39,10 +39,12 @@ export class RoverState {
 }
 
 export class MarsRover {
-  constructor(position: Coord = new Coord(0, 0), facingDirection: FacingDirection) {
+  constructor(position: Coord = new Coord(0, 0),
+              facingDirection: FacingDirection,
+              roverState: RoverState) {
     this._position = position;
     this._facingDirection = facingDirection;
-    this._roverState = new RoverState(this._position, this._facingDirection);
+    this._roverState = roverState;
   }
 
   private readonly _facingDirection: FacingDirection;
@@ -57,6 +59,7 @@ export class MarsRover {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
     }
+
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
@@ -82,7 +85,7 @@ export class MarsRover {
   }
 
   static of(position: Coord, facingDirection: FacingDirection): MarsRover {
-    return new MarsRover(position, facingDirection);
+    return new MarsRover(position, facingDirection, new RoverState(position, facingDirection));
   }
 
   publishLocation() {
