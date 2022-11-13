@@ -87,44 +87,6 @@ export class RoverStateEast implements RoverState {
   }
 
   turnRight() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
-  }
-}
-
-export class RoverStateLegacy implements RoverState {
-  private readonly _facingDirection: FacingDirection;
-  private readonly _position: Coord;
-
-  constructor(position: Coord, facingDirection: FacingDirection) {
-    this._position = position;
-    this._facingDirection = facingDirection;
-  }
-
-  publishLocation() {
-    return `${this._position.toString()}:${this._facingDirection}`;
-  }
-
-  turnLeft() {
-    if (this._facingDirection === FacingDirection.SOUTH) {
-      return new RoverStateWest(new Coord(0, 0));
-    }
-
-    if (this._facingDirection === FacingDirection.EAST) {
-      return new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH);
-    }
-
-    throw new Error("should not get here");
-  }
-
-  turnRight() {
-    if (this._facingDirection === FacingDirection.SOUTH) {
-      return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
-    }
-
-    if (this._facingDirection === FacingDirection.EAST) {
-      return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
-    }
-
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+    return new RoverStateSouth(new Coord(0, 0));
   }
 }

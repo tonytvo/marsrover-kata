@@ -1,31 +1,20 @@
-import {
-  FacingDirection,
-  MarsRover
-} from "./MarsRover";
+import { FacingDirection, MarsRover } from "./MarsRover";
 import { Coord } from "./Coord";
-import {
-  RoverState,
-  RoverStateEast,
-  RoverStateLegacy,
-  RoverStateNorth,
-  RoverStateSouth,
-  RoverStateWest
-} from "./RoverStateWest";
+import { RoverState, RoverStateEast, RoverStateNorth, RoverStateSouth, RoverStateWest } from "./RoverStateWest";
 
 export class MarsRoverFactory {
   static createMarsRoverFrom(position: Coord, facingDirection: FacingDirection) {
-    let roverState: RoverState = new RoverStateLegacy(position, facingDirection);
-    if (facingDirection === FacingDirection.WEST) {
-      roverState = new RoverStateWest(position);
-    } else if (facingDirection === FacingDirection.NORTH) {
-      roverState = new RoverStateNorth(position, facingDirection);
-    } else if (facingDirection === FacingDirection.SOUTH) {
-      roverState = new RoverStateSouth(position);
-    } else if (facingDirection === FacingDirection.EAST) {
-      roverState = new RoverStateEast(position);
+    const stateSupplierByDirection = new Map<FacingDirection, () => RoverState>([
+      [FacingDirection.WEST, () => new RoverStateWest(position)],
+      [FacingDirection.NORTH, () => new RoverStateNorth(position, facingDirection)],
+      [FacingDirection.SOUTH, () => new RoverStateSouth(position)],
+      [FacingDirection.EAST, () => new RoverStateEast(position)]
+    ]);
+    const stateSupplier = stateSupplierByDirection.get(facingDirection);
+    if (stateSupplier === undefined) {
+      throw new Error('unsupported facing direction')
     }
-
-    return MarsRover.of(roverState);
+    return MarsRover.of(stateSupplier());
   }
 
   static createMarsRoverFromFacingDirection(facingDirection: FacingDirection) {
