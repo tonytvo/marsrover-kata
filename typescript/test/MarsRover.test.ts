@@ -1,6 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
-import { FacingDirection, RoverCommand, MarsRover, Coord } from "../src/MarsRover";
+import { FacingDirection, RoverCommand, MarsRover } from "../src/MarsRover";
 import { MarsRoverFactory } from "../src/MarsRoverFactory";
+import { Coord } from "../src/Coord";
 
 describe("MarsRover", () => {
 

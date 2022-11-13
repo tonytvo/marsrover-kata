@@ -1,12 +1,9 @@
 import {
-  Coord,
   FacingDirection,
-  MarsRover,
-  RoverState,
-  RoverStateLegacy,
-  RoverStateNorth,
-  RoverStateWest
+  MarsRover
 } from "./MarsRover";
+import { Coord } from "./Coord";
+import { RoverState, RoverStateLegacy, RoverStateNorth, RoverStateWest } from "./RoverStateWest";
 
 export class MarsRoverFactory {
   static createMarsRoverFrom(position: Coord, facingDirection: FacingDirection) {
