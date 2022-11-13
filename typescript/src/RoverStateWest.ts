@@ -40,11 +40,11 @@ export class RoverStateSouth implements RoverState {
   }
 
   turnLeft() {
-    return new RoverStateWest(new Coord(0, 0));
+    return new RoverStateEast(new Coord(0, 0));
   }
 
   turnRight() {
-    return new RoverStateEast(new Coord(0, 0));
+    return new RoverStateWest(new Coord(0, 0));
   }
 }
 
@@ -60,11 +60,11 @@ export class RoverStateWest implements RoverState {
   }
 
   turnLeft() {
-    return new RoverStateSouth(new Coord(0, 0));
+    return new RoverStateNorth(new Coord(0, 0));
   }
 
   turnRight() {
-    return new RoverStateNorth(new Coord(0, 0));
+    return new RoverStateSouth(new Coord(0, 0));
   }
 }
 
