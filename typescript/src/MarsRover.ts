@@ -1,4 +1,6 @@
 import * as option from "fp-ts/lib/Option";
+import { pipe } from "fp-ts/function";
+import { Option } from "fp-ts/es6/Option";
 
 export class Coord {
   private readonly x: number;
@@ -35,7 +37,7 @@ export class RoverState {
     this._facingDirection = facingDirection;
   }
 
-  nextState(roverCommand: RoverCommand) {
+  nextState(roverCommand: RoverCommand): Option<RoverState> {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
       return option.of(new RoverState(new Coord(0, 0), FacingDirection.WEST));
     }
@@ -68,42 +70,43 @@ export class MarsRover {
 
   private rotateAppleSauce(roverCommand: RoverCommand) {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverState(new Coord(0, 0), FacingDirection.WEST));
     }
 
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.WEST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH, new RoverState(new Coord(0, 0), FacingDirection.SOUTH));
     }
 
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.WEST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, new RoverState(new Coord(0, 0), FacingDirection.NORTH));
     }
 
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverState(new Coord(0, 0), FacingDirection.WEST));
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.EAST, new RoverState(new Coord(0, 0), FacingDirection.EAST));
     }
 
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.EAST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, new RoverState(new Coord(0, 0), FacingDirection.NORTH));
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.EAST) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH);
+      return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH, new RoverState(new Coord(0, 0), FacingDirection.SOUTH));
     }
 
-    return MarsRover.of(new Coord(0, 0), FacingDirection.EAST);
+    return MarsRover.of(new Coord(0, 0), FacingDirection.EAST, new RoverState(new Coord(0, 0), FacingDirection.EAST));
   }
 
-  static of(position: Coord, facingDirection: FacingDirection): MarsRover {
-    return new MarsRover(position, facingDirection, new RoverState(position, facingDirection));
+  static of(position: Coord, facingDirection: FacingDirection, roverState: RoverState): MarsRover {
+    return new MarsRover(position, facingDirection, roverState);
   }
 
   publishLocation() {
     return this._roverState.publishLocation();
   }
 }
+
