@@ -19,15 +19,15 @@ export class RoverStateNorth implements RoverState {
   }
 
   publishLocation() {
-    return `${this._position.toString()}:${this._facingDirection}`;
+    return `${this._position.toString()}:N`;
   }
 
   turnLeft() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST);
+    return new RoverStateWest(new Coord(0, 0));
   }
 
   turnRight() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+    return new RoverStateEast(new Coord(0, 0));
   }
 }
 
@@ -47,7 +47,7 @@ export class RoverStateSouth implements RoverState {
   }
 
   turnRight() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST);
+    return new RoverStateEast(new Coord(0, 0));
   }
 }
 
@@ -63,7 +63,7 @@ export class RoverStateWest implements RoverState {
   }
 
   turnLeft() {
-    return new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH);
+    return new RoverStateSouth(new Coord(0, 0));
   }
 
   turnRight() {
