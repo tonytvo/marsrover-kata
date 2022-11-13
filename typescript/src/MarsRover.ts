@@ -69,19 +69,13 @@ export class RoverStateNorth implements RoverState {
 }
 
 export class RoverStateWest implements RoverState {
-  private readonly _facingDirection: FacingDirection;
   private readonly _position: Coord;
 
-  constructor(position: Coord, facingDirection: FacingDirection) {
+  constructor(position: Coord) {
     this._position = position;
-    this._facingDirection = facingDirection;
   }
 
   nextState(roverCommand: RoverCommand): Option<RoverState> {
-    if (this._facingDirection !== FacingDirection.WEST) {
-      throw new Error('should never execute nextState with facingDirection not West');
-    }
-
     if (roverCommand === RoverCommand.TURN_LEFT) {
       return this.turnLeft();
     }
@@ -95,7 +89,7 @@ export class RoverStateWest implements RoverState {
   }
 
   publishLocation() {
-    return `${this._position.toString()}:${this._facingDirection}`;
+    return `${this._position.toString()}:W`;
   }
 
   turnLeft() {
@@ -118,7 +112,7 @@ export class RoverStateLegacy implements RoverState {
 
   nextState(roverCommand: RoverCommand): Option<RoverState> {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return option.of(new RoverStateWest(new Coord(0, 0), FacingDirection.WEST));
+      return option.of(new RoverStateWest(new Coord(0, 0)));
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
@@ -173,7 +167,7 @@ export class MarsRover {
 
   private rotateAppleSauce(roverCommand: RoverCommand) {
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateWest(new Coord(0, 0), FacingDirection.WEST));
+      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateWest(new Coord(0, 0)));
     }
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
