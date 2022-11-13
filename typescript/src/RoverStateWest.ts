@@ -1,5 +1,4 @@
 import { Coord } from "./Coord";
-import { FacingDirection } from "./MarsRover";
 
 export interface RoverState {
   publishLocation(): string;
