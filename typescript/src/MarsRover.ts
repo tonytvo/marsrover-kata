@@ -38,8 +38,12 @@ export class RoverState {
   }
 
   nextState(roverCommand: RoverCommand): Option<RoverState> {
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
-      return option.of(new RoverState(new Coord(0, 0), FacingDirection.WEST));
+    if (this._facingDirection !== FacingDirection.NORTH) {
+      return option.none;
+    }
+
+    if (roverCommand === RoverCommand.TURN_LEFT) {
+      return this.turnLeft();
     }
 
     return option.none;
@@ -47,6 +51,10 @@ export class RoverState {
 
   publishLocation() {
     return `${this._position.toString()}:${this._facingDirection}`;
+  }
+
+  turnLeft() {
+    return option.of(new RoverState(new Coord(0, 0), FacingDirection.WEST));;
   }
 }
 
