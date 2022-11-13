@@ -51,6 +51,11 @@ export class RoverStateNorth implements RoverState {
       return this.turnLeft();
     }
 
+    if (roverCommand === RoverCommand.TURN_RIGHT) {
+      return this.turnRight();
+    }
+
+
     return option.none;
   }
 
@@ -60,7 +65,10 @@ export class RoverStateNorth implements RoverState {
 
   turnLeft() {
     return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));
-    ;
+  }
+
+  turnRight() {
+    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
   }
 }
 
