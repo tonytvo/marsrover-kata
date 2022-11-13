@@ -117,6 +117,48 @@ export class RoverStateWest implements RoverState {
   }
 }
 
+export class RoverStateLegacy implements RoverState {
+  private readonly _facingDirection: FacingDirection;
+  private readonly _position: Coord;
+
+  constructor(position: Coord, facingDirection: FacingDirection) {
+    this._position = position;
+    this._facingDirection = facingDirection;
+  }
+
+  nextState(roverCommand: RoverCommand): Option<RoverState> {
+    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.SOUTH) {
+      return option.of(new RoverStateWest(new Coord(0, 0), FacingDirection.WEST));
+    }
+
+    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.SOUTH) {
+      return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
+    }
+
+    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.EAST) {
+      return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
+    }
+
+    if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.EAST) {
+      return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
+    }
+
+    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.EAST));
+  }
+
+  publishLocation() {
+    return `${this._position.toString()}:${this._facingDirection}`;
+  }
+
+  turnLeft() {
+    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
+  }
+
+  turnRight() {
+    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
+  }
+}
+
 export class MarsRover {
   constructor(position: Coord = new Coord(0, 0),
               facingDirection: FacingDirection,
