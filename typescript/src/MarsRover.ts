@@ -1,6 +1,6 @@
 import * as option from "fp-ts/lib/Option";
 import { pipe } from "fp-ts/function";
-import { Option } from "fp-ts/es6/Option";
+import { None, Option, Some } from "fp-ts/es6/Option";
 
 export class Coord {
   private readonly x: number;
@@ -28,7 +28,12 @@ export enum RoverCommand {
   TURN_RIGHT = "R"
 }
 
-export class RoverStateNorth {
+export interface RoverState {
+  publishLocation(): string;
+  turnLeft(): None | Some<RoverStateNorth>;
+}
+
+export class RoverStateNorth implements RoverState {
   private readonly _facingDirection: FacingDirection;
   private readonly _position: Coord;
 
@@ -54,7 +59,8 @@ export class RoverStateNorth {
   }
 
   turnLeft() {
-    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));;
+    return option.of(new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));
+    ;
   }
 }
 
@@ -81,14 +87,9 @@ export class MarsRover {
   }
 
   private rotateAppleSauce(roverCommand: RoverCommand) {
-    if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.NORTH) {
-      return MarsRover.of(new Coord(0, 0), FacingDirection.WEST, new RoverStateNorth(new Coord(0, 0), FacingDirection.WEST));
-    }
-
     if (roverCommand === RoverCommand.TURN_LEFT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.SOUTH, new RoverStateNorth(new Coord(0, 0), FacingDirection.SOUTH));
     }
-
 
     if (roverCommand === RoverCommand.TURN_RIGHT && this._facingDirection === FacingDirection.WEST) {
       return MarsRover.of(new Coord(0, 0), FacingDirection.NORTH, new RoverStateNorth(new Coord(0, 0), FacingDirection.NORTH));
